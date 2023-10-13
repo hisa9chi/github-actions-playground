@@ -17,6 +17,7 @@ jobs:
         with:
           payload: |
             {
+              "text": "<!here> Issue が割り当てられました。\nTitle: $ISSUE_TITLE\n報告者: $ISSUE_REPORTER\nURL: $ISSUE_LINK",
               "blocks": [
                 {
                   "type": "section",
