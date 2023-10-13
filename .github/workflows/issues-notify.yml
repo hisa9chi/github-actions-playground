@@ -12,35 +12,25 @@ jobs:
     steps:
       - name: debug github.event
         run: echo '${{ toJSON(github.event) }}'
-      # - name: notify slack
-      #   uses: slackapi/slack-github-action@v1.16.0
-      #   with:
-      #     payload: |
-      #       {
-      #         "text": "<!here> Issue が割り当てられました。\nTitle: ${{ ISSUE_TITLE }}\n報告者: ${{ ISSUE_REPORTER }}\nURL: ${{ ISSUE_LINK }}"
-      #         "text": "ビルド結果: ${{ job.status }}\n\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-      #         "blocks": [
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": ":github: ビルド結果: ${{ job.status }}\n\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-      #             }
-      #           },
-      #           {
-      #             "type": "context",
-      #             "elements": [
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "Author: <https://github.com/${{ github.event.sender.login }}|@${{ github.event.sender.login }}>"
-      #               }
-      #             ]
-      #           }
-      #         ]
-      #       }
-      #   env:
-      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-      #     SLACK_WEBHOOK_URL: secrets.SLACK_INCOMING_WEBHOOK_URL_SERVICE
-      #     ISSUE_REPORTER: ${{ github.event.sender.login}}
-      #     ISSUE_TITLE: ${{ github.event.issue.title}}
-      #     ISSUE_LINK: ${{ github.event.issue.html_url }}
+      - name: notify slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "<!here> Issue が割り当てられました。\nTitle: ${{ ISSUE_TITLE }}\n報告者: ${{ ISSUE_REPORTER }}\nURL: ${{ ISSUE_LINK }}"
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "<!here> Issue が割り当てられました。\nTitle: ${{ ISSUE_TITLE }}\n報告者: ${{ ISSUE_REPORTER }}\nURL: ${{ ISSUE_LINK }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          SLACK_WEBHOOK_URL: secrets.SLACK_INCOMING_WEBHOOK_URL_SERVICE
+          ISSUE_REPORTER: ${{ github.event.user.login}}
+          ISSUE_TITLE: ${{ github.event.title}}
+          ISSUE_LINK: ${{ github.event.issue.html_url }}
