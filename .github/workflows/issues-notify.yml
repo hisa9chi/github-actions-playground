@@ -31,6 +31,6 @@ jobs:
         env:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
           SLACK_WEBHOOK_URL: secrets.SLACK_INCOMING_WEBHOOK_URL_SERVICE
-          ISSUE_REPORTER: ${{ github.event.user.login}}
-          ISSUE_TITLE: ${{ github.event.title}}
+          ISSUE_REPORTER: ${{ github.event.issue.user.login}}
+          ISSUE_TITLE: ${{ github.event.issue.title}}
           ISSUE_LINK: ${{ github.event.issue.html_url }}
