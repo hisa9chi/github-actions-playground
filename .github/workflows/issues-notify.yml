@@ -2,7 +2,7 @@ name: Issue Nofity
 
 on:
   issues:
-    type:
+    types:
       - labeled
 
 jobs:
