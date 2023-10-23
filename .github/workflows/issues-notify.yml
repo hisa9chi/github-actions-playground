@@ -12,25 +12,25 @@ jobs:
     steps:
       - name: debug github.event
         run: echo '${{ toJSON(github.event) }}'
-      - name: notify slack
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": "<!here> Issue が割り当てられました。\nTitle: ${{ env.ISSUE_TITLE }}\n報告者: ${{ env.ISSUE_REPORTER }}\nURL: ${{ env.ISSUE_LINK }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "<!here> Issue が割り当てられました。\nTitle: ${{ env.ISSUE_TITLE }}\n報告者: ${{ env.ISSUE_REPORTER }}\nURL: ${{ env.ISSUE_LINK }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL_SERVICE }}
-          ISSUE_REPORTER: ${{ github.event.issue.user.login }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_LINK: ${{ github.event.issue.html_url }}
+#      - name: notify slack
+#        uses: slackapi/slack-github-action@v1.24.0
+#        with:
+#          payload: |
+#            {
+#              "text": "<!here> Issue が割り当てられました。\nTitle: ${{ env.ISSUE_TITLE }}\n報告者: ${{ env.ISSUE_REPORTER }}\nURL: ${{ env.ISSUE_LINK }}",
+#              "blocks": [
+#                {
+#                  "type": "section",
+#                  "text": {
+#                    "type": "mrkdwn",
+#                    "text": "<!here> Issue が割り当てられました。\nTitle: ${{ env.ISSUE_TITLE }}\n報告者: ${{ env.ISSUE_REPORTER }}\nURL: ${{ env.ISSUE_LINK }}"
+#                  }
+#                }
+#              ]
+#            }
+#        env:
+#          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL_SERVICE }}
+#          ISSUE_REPORTER: ${{ github.event.issue.user.login }}
+#          ISSUE_TITLE: ${{ github.event.issue.title }}
+#          ISSUE_LINK: ${{ github.event.issue.html_url }}
