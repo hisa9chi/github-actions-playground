@@ -1,7 +1,10 @@
 name: Dispatch Job Test
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - not-main-branch-job
+  workflow_dispatch: {}
 
 jobs:
   dummy:
