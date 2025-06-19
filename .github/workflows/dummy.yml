@@ -1,11 +1,10 @@
-name: dispatch dummy
+name: Dispatch Job Test
 
 on:
   workflow_dispatch:
 
 jobs:
   dummy:
-    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
-      - run: ""
+      - run: echo "Hello Job"
