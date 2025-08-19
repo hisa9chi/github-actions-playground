@@ -9,4 +9,7 @@ jobs:
     steps:
       - run: echo "Hello Job"
 
-      - run: echo "${{ github }}"
+      - run: |
+          echo "${{ github.repo.repo }}"
+          echo "${{ github.ref }}"
+          echo "${{ github.sha }}"
