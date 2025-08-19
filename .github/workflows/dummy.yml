@@ -10,6 +10,7 @@ jobs:
       - run: echo "Hello Job"
 
       - run: |
-          echo "${{ github.repo.repo }}"
-          echo "${{ github.ref }}"
+          echo "github.repository = ${{ github.repository }}"
           echo "${{ github.sha }}"
+          echo "github.ref = ${{ github.ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
