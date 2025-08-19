@@ -9,4 +9,4 @@ jobs:
     steps:
       - run: echo "Hello Job"
 
-      - run: echo "${{ context }}"
+      - run: echo "${{ github }}"
