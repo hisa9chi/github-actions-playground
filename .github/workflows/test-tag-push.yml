@@ -30,11 +30,11 @@ jobs:
           echo "$BRANCHES"
           for BRANCH in $BRANCHES ; do
             if [[ "$BRANCH" == "origin/main" ]]; then
-              echo "is-main='true'" >> "$GITHUB_OUTPUT"
+              echo "is-main=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
           done
-          echo "is-main='false'" >> "$GITHUB_OUTPUT"
+          echo "is-main=false" >> "$GITHUB_OUTPUT"
       
       - run: echo ${{ steps.check-branch.outputs.is-main }}
 
