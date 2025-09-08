@@ -19,6 +19,10 @@ jobs:
         with:
           persist-credentials: "false"
           fetch-depth: 0
+
+      - name: branch
+        run: git brnach
+        
       - name: Check tagged branch
         id: check-branch
         run: |
