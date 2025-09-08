@@ -27,6 +27,7 @@ jobs:
           for BRANCH in $BRANCHES ; do
             if [[ "$BRANCH" == "origin/main" ]]; then
               echo "is-main='true'" >> "$GITHUB_OUTPUT"
+              exit 0
             fi
           done
           echo "is-main='false'" >> "$GITHUB_OUTPUT"
