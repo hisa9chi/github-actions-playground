@@ -1,0 +1,41 @@
+name: tag push test
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 5
+    outputs:
+      is-main: ${{ steps.check-branch.outputs.is-main }}
+    steps:
+      - name: Checkout
+        id: check-branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683   # v4.2.2
+        with:
+          persist-credentials: "false"
+          fetch-depth: 0
+      - name: Check tagged branch
+        run: |
+          BRANCHES=$(git branch -r --contains)
+          echo "$BRANCHES"
+          for BRANCH in $BRANCHES ; do
+            if [[ "$BRANCH" == "origin/main" ]]; then
+              echo "is-main='true'" >> "$GITHUB_OUTPUT"
+            fi
+          done
+          echo "is-main='false'" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: check-branch
+    runs-on: ubuntu-latest
+    if: ${{ needs.check-branch.outputs.is-main == 'true' }}
+    permissions:
+      contents: read
+    steps:
+      - run: echo "Hello test"
