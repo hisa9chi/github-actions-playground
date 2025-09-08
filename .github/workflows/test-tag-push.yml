@@ -51,5 +51,5 @@ jobs:
           fi
 
       - name: if test
-        if: ${{ needs.check-branch.outputs.is-main == 'true' }}
+        if: needs.check-branch.outputs.is-main
         run: echo "if true"
