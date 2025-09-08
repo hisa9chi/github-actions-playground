@@ -37,8 +37,19 @@ jobs:
   test:
     needs: check-branch
     runs-on: ubuntu-latest
-    if: ${{ needs.check-branch.outputs.is-main == 'true' }}
+    # if: ${{ needs.check-branch.outputs.is-main == 'true' }}
     permissions:
       contents: read
     steps:
-      - run: echo "Hello main branch"
+      - run: echo ${{ needs.check-branch.outputs.is-main }}
+
+      - run: |
+          if ${{ needs.check-branch.outputs.is-main == 'true' }}; then
+            echo true
+          else
+            echo false
+          fi
+
+      - name: if test
+        if: ${{ needs.check-branch.outputs.is-main == "true" }}
+        run: echo "if true"
