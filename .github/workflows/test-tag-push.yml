@@ -43,13 +43,6 @@ jobs:
     steps:
       - run: echo ${{ needs.check-branch.outputs.is-main }}
 
-      - run: |
-          if ${{ needs.check-branch.outputs.is-main == 'true' }}; then
-            echo true
-          else
-            echo false
-          fi
-
       - name: if test
         if: needs.check-branch.outputs.is-main
         run: echo "if true"
