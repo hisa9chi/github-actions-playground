@@ -32,15 +32,20 @@ jobs:
           done
           echo "is-main='false'" >> "$GITHUB_OUTPUT"
       
-      - name:
-        run: |
-          echo ${{ steps.check-branch.outputs.is-main }}
+      - run: echo ${{ steps.check-branch.outputs.is-main }}
 
   test:
     needs: check-branch
     runs-on: ubuntu-latest
-    if: ${{ needs.check-branch.outputs.is-main == 'true' }}
+    # if: ${{ needs.check-branch.outputs.is-main == 'true' }}
     permissions:
       contents: read
     steps:
-      - run: echo "Hello test"
+      - run: echo ${{ needs.check-branch.outputs.is-main }}
+
+      - run: |
+          if ${{ needs.check-branch.outputs.is-main == 'true' }}; then
+            echo true
+          else
+            echo false
+          fi
