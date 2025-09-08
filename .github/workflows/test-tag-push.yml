@@ -41,7 +41,7 @@ jobs:
   test:
     needs: check-branch
     runs-on: ubuntu-latest
-    if: needs.check-branch.outputs.is-main
+    if: needs.check-branch.outputs.is-main == 'true'
     permissions:
       contents: read
     steps:
