@@ -30,6 +30,10 @@ jobs:
             fi
           done
           echo "is-main='false'" >> "$GITHUB_OUTPUT"
+      
+      - name:
+        run: |
+          echo ${{ steps.check-branch.outputs.is-main }}
 
   test:
     needs: check-branch
